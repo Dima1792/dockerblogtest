@@ -1,0 +1,13 @@
+services:
+php-fpm:
+container_name: onex_fpm
+hostname: onex_fpm
+image: laradock/php-fpm:latest-8.1
+volumes:
+  - C:/OSPanel/domains/blog/:/var/www/html
+ports:
+  - "80:80"
+extra_hosts:
+  - "host.docker.internal:host-gateway"
+environment:
+  - PHP_IDE_CONFIG=serverName=localhost
