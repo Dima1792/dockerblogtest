@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('currensies-cb', function (Blueprint $table) {
+        Schema::create('cb_currencies', function (Blueprint $table) {
             $table->id();
             $table->string('date');
             $table->string('valute',10);
@@ -21,12 +21,11 @@ return new class extends Migration
             $table->unique([ 'valute','date']);
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('currensies_cb');
+        Schema::dropIfExists('cb_currencies');
     }
 };

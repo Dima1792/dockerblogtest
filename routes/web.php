@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\testController;
 use App\Http\Controllers\weatherController;
 use App\Http\Controllers\blogController;
-
+use App\Http\Controllers\CurrencyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,11 +22,11 @@ Route::get('/', function () {
 });
 Route::any('/test/{currency?}', [testController::class, 'testAction']);
 
-Route::get('/currency/list',[\App\Http\Controllers\CurrencyController::class, 'list'])->name('currencyList');
-Route::get('/currency/get/{code}',[\App\Http\Controllers\CurrencyController::class, 'get'])->name('currencyGet');
-Route::post('/currency/save/{currency?}',[\App\Http\Controllers\CurrencyController::class, 'save'])->name('currencySave');
-Route::get('/currency/edit/{currency}',[\App\Http\Controllers\CurrencyController::class, 'FormEdit'])->name('currencyEdit');
-Route::get('/currency/saveForm',[\App\Http\Controllers\CurrencyController::class, 'saveForm'])->name('currencySaveForm');
+Route::get('/currency/list',[CurrencyController::class, 'list'])->name('currencyList');
+Route::get('/currency/get/{code}',[CurrencyController::class, 'get'])->name('currencyGet');
+Route::post('/currency/save/{currency?}',[CurrencyController::class, 'save'])->name('currencySave');
+Route::get('/currency/edit/{currency}',[CurrencyController::class, 'FormEdit'])->name('currencyEdit');
+Route::get('/currency/saveForm',[CurrencyController::class, 'saveForm'])->name('currencySaveForm');
 
 Route::get('/weather/{city?}/{time?}', [weatherController::class, 'getWeather']);
 Route::any('/article/{article?}',    [blogController::class, 'web']);

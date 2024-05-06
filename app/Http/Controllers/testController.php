@@ -12,17 +12,20 @@ class testController extends Controller
 {
     public function testAction( Request $request, CurrencyService $currencyService,string $currency=null)
     {
-        $currency ??= $request->post('currency', '');
-        try {
-            $result=$currencyService->getStringFromResult($currencyService->getCurrencies($currency));
+        $currency ??= $request->post('currencyName', '');
 
-            return view('currency', compact('result'));
+        try {
+            $currencyService->updateCurrenciesIfNeed();
+            $result=$currencyService->getStringFromResult($currencyService->getCurrencies($currency));
+            $list = $currencyService->getListCurrency();
+            $item =$currency;
+            return view('currency', compact('result','list','item'));
 
         } catch (ExceptionNotRegCurrency $exception){
             Log::error($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
-            //abort(404);
-            return view('404');
-        } catch (\Throwable $exception){
+            abort(404);
+            //return view('404');
+        } catch (Throwable $exception){
             Log::error($exception->getMessage() . PHP_EOL . $exception->getTraceAsString());
             throw $exception;
         }

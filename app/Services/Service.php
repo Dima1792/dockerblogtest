@@ -21,16 +21,15 @@ class Service
     {
         return new Request($method, $url);
     }
-    public function getData(string $prefixFile,string $urlRequest):string
+    public function getDataWithRequest(Request $request)
     {
-        $fileName = dirname(__DIR__ ,1). '/File/' . date("Y-n-d") . $prefixFile;
-        if (file_exists($fileName)) {
-            return file_get_contents($fileName);
-        }
-        $clien= $this->getClientGuzzle();
-        $request = $this->getNewRequest('GET', $urlRequest);
-        $res= $clien->sendAsync($request)->wait();
-        file_put_contents($fileName,(string)$res->getbody());
+        return $this->getClientGuzzle()
+            ->sendAsync($request)
+            ->wait();
+    }
+    public function getDataFormAPI($method, string $urlRequest):string
+    {
+        $res = $this->getDataWithRequest($this->getNewRequest($method, $urlRequest));
         return (string)$res->getbody();
     }
 }

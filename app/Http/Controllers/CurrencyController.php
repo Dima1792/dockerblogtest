@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CurrencyController extends Controller{
     public function list(CurrencyServices $currencyServices)
     {
-
+        //$currencyServices->insertNewCurrecies();
         return view(
             'List',
             ['currencies' => $currencyServices->getall()]
