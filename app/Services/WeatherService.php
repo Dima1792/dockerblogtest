@@ -68,7 +68,7 @@ class WeatherService extends Service
     {
         return $this->guideCity->getCityList();
     }
-    public function getWeatherFormAPI(string $city,string $param)
+    public function getWeatherFormAPI(string $city)
     {
         if (empty($city)) {
             throw new WeatherExceptionNotSpecifiedCity('Криворукий пользователь не ввел название города');
@@ -93,7 +93,7 @@ class WeatherService extends Service
     }
     public function getResultFromDB(string $city, string $time, string $key) : array
     {
-        $items = $this->getWeatherFormAPI($city, $key);
+        $items = $this->getWeatherFormAPI($city);
         $namePool= static::PARAMS[$key];
         $count = 0;
         $resultText[$count] = 'Погода для города ' . $city;

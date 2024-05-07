@@ -14,6 +14,7 @@ class CurrencyServices extends Service
     }
     public function save(?Currency $currency, string $code, string $name, string $value)
     {
+
         $this->currencyRepository->inserOrUpdateNoteDB([Currency::f_CODE => $code], [Currency::f_VALUE => $value, Currency::f_NAME => $name]);
 //        if (empty($currency)) {
 //            $currency =$this->currencyRepository->getNewModel();

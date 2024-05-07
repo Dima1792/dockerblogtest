@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CurrencySaveRequest;
 use App\Models\Currency;
 use App\Services\CurrencyServices;
+use App\Services\ErrorService;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller{
@@ -20,7 +22,7 @@ class CurrencyController extends Controller{
         return view('Get',
             ['currency' =>  $currencyServices->getbycode($code)]);
     }
-    public function save(Request $request, CurrencyServices $currencyServices, ?Currency $currency=null)
+    public function save(CurrencySaveRequest $request, CurrencyServices $currencyServices, ?Currency $currency=null)
     {
         $currencyServices->save(
             $currency,
@@ -29,9 +31,12 @@ class CurrencyController extends Controller{
             $request->post('value'));
         return response()->redirectToRoute('currencyList');
     }
-    public function saveForm()
+    public function saveForm(ErrorService $errorService)
     {
-        return view('FormSave');
+        return view('FormSave',
+        [
+            'errorsValidate' => $errorService ->getErrors(['code','name','value'])
+        ]);
     }
     public function FormEdit(Currency $currency)
     {

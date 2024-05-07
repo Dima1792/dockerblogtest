@@ -15,7 +15,7 @@ class GuideCityRepository extends Repository
        $rezult = $this->getBuilder()
            ->select('latitude', 'longitude')
            ->where('city', '=', $city)
-           ->get()[0];
+           ->first();
         return '?latitude='.$rezult['latitude'].'&longitude='.$rezult['longitude'];
     }
     public function getTimeZone(string $city):string
