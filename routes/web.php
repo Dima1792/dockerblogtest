@@ -25,7 +25,7 @@ Route::any('/test/{currency?}', [testController::class, 'testAction']);
 Route::get('/currency/list',[CurrencyController::class, 'list'])->name('currencyList');
 Route::get('/currency/get/{code}',[CurrencyController::class, 'get'])->name('currencyGet');
 Route::post('/currency/save/{currency?}',[CurrencyController::class, 'save'])->name('currencySave');
-Route::get('/currency/edit/{currency}',[CurrencyController::class, 'FormEdit'])->name('currencyEdit');
+Route::any('/currency/edit/{currency}',[CurrencyController::class, 'FormEdit'])->name('currencyEdit');
 Route::get('/currency/saveForm',[CurrencyController::class, 'saveForm'])->name('currencySaveForm');
 
 Route::get('/weather/{city?}/{time?}', [weatherController::class, 'getWeather']);

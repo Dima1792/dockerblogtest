@@ -5,20 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Closure;
 
-class CurrencySaveRequest extends BaseRequest
+class CurrencyEditRequest extends FormRequest
 {
-    public static function getFromFieldsName(): string
-    {
-        return 'fields_key_session';
-    }
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -34,8 +22,8 @@ class CurrencySaveRequest extends BaseRequest
                 'max:10',
                 function (string $attribute, mixed $value, Closure $fail) {
                     $valueNew = str_replace(',','.',$value);
-                        if (!is_numeric($valueNew)){
-                            $fail("Поле {$attribute} невалидное, должно быть число");
+                    if (!is_numeric($valueNew)){
+                        $fail("Поле {$attribute} невалидное, должно быть число");
                     }
                 },
             ],

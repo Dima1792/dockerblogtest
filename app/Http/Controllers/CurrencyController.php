@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 class CurrencyController extends Controller{
     public function list(CurrencyServices $currencyServices)
     {
-        //$currencyServices->insertNewCurrecies();
         return view(
             'List',
             ['currencies' => $currencyServices->getall()]
@@ -31,17 +30,27 @@ class CurrencyController extends Controller{
             $request->post('value'));
         return response()->redirectToRoute('currencyList');
     }
-    public function saveForm(ErrorService $errorService)
+    public function saveForm(ErrorService $errorService, Request $request)
     {
+        $fields = $request->session()->get(CurrencySaveRequest::getFromFieldsName());
+        $request->session()->pull(CurrencySaveRequest::getFromFieldsName(),null);
         return view('FormSave',
         [
-            'errorsValidate' => $errorService ->getErrors(['code','name','value'])
+            'errorsValidate' => $errorService ->getErrors(['code','name','value']),
+            'fields' => $fields
         ]);
     }
-    public function FormEdit(Currency $currency)
+    public function FormEdit(ErrorService $errorService, Currency $currency, Request $request)
     {
+
         return view('FormEdit',
-            ['currency' =>  $currency]
-    );
+            [
+                'currency' =>  $currency,
+                'errorsValidate' => $errorService ->getErrors(['code','name','value'])
+//                'code' => $request->get('code'),
+//                'name' => $request->get('name'),
+//                'value' => $request->post('value','')
+            ]
+        );
     }
 }
