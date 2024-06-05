@@ -3,14 +3,25 @@
 ?>
 @extends('basa')
 @section('contents1')
-    <h2>Давайте узнаем погода в некоторых городах?</h2>
-    @foreach($result as $key=>$value)
+    <div id="waitCity">Выберете город из списка</div>
+
+    <script>
+        fetch("{{route("ListJS")}}",{
+            method:"GET",
+        }).then(response=>response.json())
+            .then(response=>{
+                document.getElementById('ListJS').innerText = response?.listCurrency;
+            });
+        <h2>Давайте узнаем погода в некоторых городах?</h2>
+        @foreach($result as $key=>$value)
         <div> {{$value}}</div>
-    @endforeach
+        @endforeach
+    </script>
+
     <form action='/weather' method='get'>
-        <select type="text" name="cityGet" method="post">
+        <select type="text" name="cityGet"
             @foreach ($listCity as $key)
-                <option value={{$key}}>{{$key}}</option>;
+                <option @if($key === $city) selected @endif value={{$key}}>{{$key}}</option>;
             @endforeach
         </select>
         <select type="text" name="params" value="param">

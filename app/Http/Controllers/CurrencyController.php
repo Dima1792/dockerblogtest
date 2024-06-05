@@ -9,6 +9,13 @@ use App\Services\ErrorService;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller{
+    public  function listJS(CurrencyServices $currencyServices)
+    {
+        sleep(5);
+        return [
+          'listCurrency' => $currencyServices->getall()
+        ];
+    }
     public function list(CurrencyServices $currencyServices)
     {
         return view(
@@ -40,16 +47,15 @@ class CurrencyController extends Controller{
             'fields' => $fields
         ]);
     }
-    public function FormEdit(ErrorService $errorService, Currency $currency, Request $request)
+    public function FormEdit(ErrorService $errorService, Currency $currency,Request $request)
     {
-
+        $fields = $request->session()->get(CurrencySaveRequest::getFromFieldsName());
+        $request->session()->pull(CurrencySaveRequest::getFromFieldsName(),null);
         return view('FormEdit',
             [
                 'currency' =>  $currency,
-                'errorsValidate' => $errorService ->getErrors(['code','name','value'])
-//                'code' => $request->get('code'),
-//                'name' => $request->get('name'),
-//                'value' => $request->post('value','')
+                'errorsValidate' => $errorService ->getErrors(['code','name','value']),
+                'fields' => $fields
             ]
         );
     }

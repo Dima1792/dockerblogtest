@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::any('/test/{currency?}', [testController::class, 'testAction']);
 
 Route::get('/currency/list',[CurrencyController::class, 'list'])->name('currencyList');
+Route::get('/currency/listJS',[CurrencyController::class, 'listJS'])->name('ListJS');
 Route::get('/currency/get/{code}',[CurrencyController::class, 'get'])->name('currencyGet');
 Route::post('/currency/save/{currency?}',[CurrencyController::class, 'save'])->name('currencySave');
 Route::any('/currency/edit/{currency}',[CurrencyController::class, 'FormEdit'])->name('currencyEdit');
