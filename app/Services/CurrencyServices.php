@@ -15,17 +15,18 @@ class CurrencyServices extends Service
     public function save(?Currency $currency, string $code, string $name, string $value)
     {
 
-        $this->currencyRepository->inserOrUpdateNoteDB(
-            [Currency::f_CODE => $code],
-            [Currency::f_VALUE => $value, Currency::f_NAME => $name]);
+//        $this->currencyRepository->inserOrUpdateNoteDB(
+//            [Currency::f_CODE => $code],
+//            [Currency::f_VALUE => $value, Currency::f_NAME => $name]);
 //        if (empty($currency)) {
 //            $currency =$this->currencyRepository->getNewModel();
 //        }
-//        $currency->code = $code;
-//        $currency->name = $name;
-//        $currency->value = $value;
-//        $this->currencyRepository->save($currency);
-//        return response()->redirectToRoute('currencyList');
+        $currency = new Currency;
+        $currency->code = $code;
+        $currency->name = $name;
+        $currency->value = $value;
+        $this->currencyRepository->save($currency);
+        return response()->redirectToRoute('currencyList');
     }
     public function getbycode(string $code)
     {

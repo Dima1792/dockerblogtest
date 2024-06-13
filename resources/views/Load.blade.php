@@ -4,7 +4,7 @@
     fetch("{{route("ListJS")}}",{
         method:"GET",
     }).then(response=>response.json())
-    .then(response=>{
-        document.getElementById('test').innerText = response?.listCurrency;
-    });
+        .then(response=>{
+            document.getElementById('test').innerText = response?.listCurrency;
+        });
 </script>

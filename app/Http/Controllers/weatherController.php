@@ -43,6 +43,6 @@ class weatherController extends Controller
         $listCity = $weatherService->listCity();
         $listParams = $weatherService->getListFromViews();
         //sleep(7);
-        return ['ListJS' => 'result','listParams','listCity'];
+        return ['ListJS' => 'result'.'listParams'.'listCity'];
     }
 }
